@@ -1,17 +1,23 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors');
+const path = require('path');
 const TodoModel = require('./models/Todo');
 
 const app = express();
 app.use(cors());
 app.use(express.json());
+app.use(express.static(path.join(__dirname, "static/build")));
 
-mongoose.connect('mongodb://127.0.0.1:27017/TODO',
+const MONGODB_URI = process.env.MONGODB_URI || 'mongodb://127.0.0.1:27017/TODO';
+const PORT = process.env.PORT || 5000;
+
+console.log('Connecting to MongoDB...',MONGODB_URI  );
+mongoose.connect(MONGODB_URI,
     console.log('MongoDB connected')
 )
 
-app.listen(5000,
+app.listen(PORT,
     console.log('Server listening on port: 5000')
 )
 
@@ -50,5 +56,9 @@ app.delete('/delete/:id',(req,res)=>{
   .then(result=> res.json(result))
   .catch(err=>res.json(err));
  }); 
+
+ app.get("*", (req, res) => {
+  res.sendFile(path.join(__dirname, "static/build", "index.html"));
+ });
 
 module.exports=app;
