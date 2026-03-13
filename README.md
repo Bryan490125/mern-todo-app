@@ -36,6 +36,7 @@ npm run build
 The build artifact is in build/. Copy or move it to the backend folder.
 ```
 cd todo_frontend
+mkdir -o ../todo_backend/static
 mv build ../todo_backend/static
 ```
 In todo_backend/static, there should be a build/ in it.
