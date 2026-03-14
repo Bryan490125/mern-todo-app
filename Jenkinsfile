@@ -31,11 +31,13 @@ pipeline {
         stage('Deploy or Test') {
             steps {
                 // Testing the container locally as the Deploy/Test stage
-                sh '''
-                docker stop todo-app || true
-                docker rm todo-app || true
-                docker run -d --name todo-app -p 8080:5000 -e MONGODB_URI="mongodb+srv://vmes-ead:WQW4TVXAAvgoQoYb@cluster0.xzkm7.mongodb.net/?appName=Cluster0" $DOCKER_USERNAME/finead-todo-app:latest
-                '''
+                withCredentials([string(credentialsId: 'mongodb-uri', variable: 'MONGO_URI')]) {
+                    sh '''
+                    docker stop todo-app || true
+                    docker rm todo-app || true
+                    docker run -d --name todo-app -p 8080:5000 -e MONGODB_URI="${MONGO_URI}" $DOCKER_USERNAME/finead-todo-app:latest
+                    '''
+                }
             }
         }
 

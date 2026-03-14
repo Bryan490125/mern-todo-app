@@ -1,0 +1,1 @@
+docker run -p 8080:5000 -e MONGODB_URI="mongodb+srv://vmes-ead:WQW4TVXAAvgoQoYb@cluster0.xzkm7.mongodb.net/?appName=Cluster0" bryan123/finead-todo-app:latest
