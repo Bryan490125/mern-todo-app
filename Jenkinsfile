@@ -6,11 +6,10 @@ pipeline {
         DOCKER_USERNAME = 'bryan490125'
     }
 
-    stages {
-        stage('Build') {
-            steps {
-                sh 'npm install'
-            }
+   stage('Build') {
+    steps {
+        echo 'Build stage'
+        }
         }
 
         stage('Containerise') {
