@@ -1,0 +1,10 @@
+{
+  "name": "mern-todo-app",
+  "version": "1.0.0",
+  "description": "MERN Todo App",
+  "scripts": {
+    "postinstall": "cd backend && npm install && cd ../frontend && npm install && npm run build && mkdir -p ../backend/static && cp -r build ../backend/static/",
+    "start": "cd backend && npm start"
+  },
+  "dependencies": {}
+}
